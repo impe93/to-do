@@ -1,0 +1,10 @@
+h1 {
+  padding-top: calc(20px + 3vw);
+  text-align: center;
+  width: 100%;
+}
+
+#lista {
+  margin-left: 20px;
+  margin-right: 20px;
+}
