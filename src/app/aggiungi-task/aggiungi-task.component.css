@@ -2,3 +2,12 @@
   margin-top: calc(20px + 2vw);
   margin-bottom: calc(20px + 2vw);
 }
+
+#paragrafo-errore {
+  color: red;
+  font-size: 12px;
+}
+
+button {
+  width: 100%
+}

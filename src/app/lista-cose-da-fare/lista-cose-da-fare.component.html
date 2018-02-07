@@ -1,7 +1,19 @@
 <h1>La mia lista delle cose da fare</h1>
 
-<app-aggiungi-task></app-aggiungi-task>
+<app-aggiungi-task (aggiuntaTask)="aggiuntaTask($event)"></app-aggiungi-task>
 
-<div id="lista" class="list-group">
-  <a href="#" class="list-group-item list-group-item-action"></a>
+<h2 *ngIf="tasks.length >= 1">Attività attive</h2>
+
+<div id="lista-attivi" class="list-group">
+  <app-elemento-lista
+    *ngFor="let task of tasks"
+    [task]="task"
+    (modificaTask)="modificaTask($event)"
+    (eliminazioneTask)="eliminaTask($event)"
+    (completamentoTask)="completaTask($event)"></app-elemento-lista>
+</div>
+
+<h2 *ngIf="tasksEliminati.length >= 1" >Attività eliminate</h2>
+<div id="lista-eliminati" class="list-group">
+  <a class="list-group-item list-group-item-action list-group-item-danger" *ngFor="let task of tasksEliminati; let i=index"><h5>{{ i + 1 }}. {{ task.getTesto() }}</h5></a>
 </div>

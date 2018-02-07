@@ -1,10 +1,11 @@
 <div id="aggiungi-task" class="container-fluid">
   <div class="row">
     <div class="col-md-9 mb-3">
-      <input #nuovoTask id="nuovoTask" type="text" class="form-control" placeholder="Inserisci un nuovo task">
+      <input [(ngModel)]="nuovoTask" id="nuovoTask" type="text" class="form-control" placeholder="Inserisci un nuovo task">
+      <p id="paragrafo-errore" *ngIf="invalido">Inserire un task valido, il nuovo task deve contenere almeno un carattere.</p>
     </div>
-    <div class="col-md-3" style="text-align: right">
-      <button type="submit" class="btn btn-primary" style="width: 100%">Aggiungi Attività!</button>
+    <div class="col-md-3">
+      <button (click)="inserisciTask()" class="btn btn-primary">Aggiungi Attività!</button>
     </div>
   </div>
 </div>

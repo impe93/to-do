@@ -1,10 +1,22 @@
+h2,
 h1 {
-  padding-top: calc(20px + 3vw);
   text-align: center;
   width: 100%;
+  margin-left: 20px;
+  margin-right: 20px;
 }
 
-#lista {
+h1 {
+  margin-top: calc(20px + 3vw);
+}
+
+h2 {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+#lista-eliminati,
+#lista-attivi {
   margin-left: 20px;
   margin-right: 20px;
 }
