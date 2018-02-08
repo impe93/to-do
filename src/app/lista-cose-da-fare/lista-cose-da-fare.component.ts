@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Task } from '../../modelli/Task';
+import { Messaggio } from '../../modelli/Messaggio';
 
 @Component({
   selector: 'app-lista-cose-da-fare',
@@ -10,6 +11,7 @@ export class ListaCoseDaFareComponent implements OnInit {
 
   tasks: Task[] = [];
   tasksEliminati: Task[] = [];
+  tasksCompletati: Task[] = [];
 
   constructor() { }
 
@@ -17,21 +19,31 @@ export class ListaCoseDaFareComponent implements OnInit {
   }
 
   aggiuntaTask(task: string) {
-    this.tasks.push(new Task(task, this.tasks.length));
+    this.tasks.push(new Task(task));
   }
 
-  modificaTask(oggetto: Task) {
-    this.tasks[oggetto.getIndice()] = oggetto;
+  modificaTask(messaggio: Messaggio) {
+    this.tasks[messaggio.indice] = messaggio.task;
   }
 
-  eliminaTask(oggetto: Task) {
-    this.tasksEliminati.push(oggetto);
-    this.tasks.splice(oggetto.getIndice(), 1);
-    console.log(this.tasks);
+  eliminaTask(messaggio: Messaggio) {
+    if (this.tasks.splice(messaggio.indice, 1) !== []) {
+      this.tasksEliminati.push(messaggio.task);
+    }
   }
 
-  completaTask(oggetto: Task) {
-    this.tasks[oggetto.getIndice()] = oggetto;
+  completaTask(messaggio: Messaggio) {
+    if (this.tasks.splice(messaggio.indice, 1) !== []) {
+      this.tasksCompletati.push(messaggio.task);
+    }
+  }
+
+  rimuoviCompletate() {
+    this.tasksCompletati = [];
+  }
+
+  rimuoviEliminate() {
+    this.tasksEliminati = [];
   }
 
 }

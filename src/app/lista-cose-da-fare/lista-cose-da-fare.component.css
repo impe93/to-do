@@ -1,12 +1,12 @@
 h2,
 h1 {
-  text-align: center;
-  width: 100%;
+  text-align: left;
   margin-left: 20px;
   margin-right: 20px;
 }
 
 h1 {
+  text-align: center;
   margin-top: calc(20px + 3vw);
 }
 
@@ -15,8 +15,14 @@ h2 {
   margin-bottom: 20px;
 }
 
+#lista-completati,
 #lista-eliminati,
 #lista-attivi {
   margin-left: 20px;
   margin-right: 20px;
+}
+
+.bottone-rimozione {
+  margin: 20px;
+  margin-top: 0px;
 }

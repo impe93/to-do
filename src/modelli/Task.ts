@@ -2,11 +2,9 @@ export class Task {
 
   private stato: string;
   private testo: string;
-  private indice: number;
 
-  constructor(testo: string, indice: number) {
+  constructor(testo: string) {
     this.testo = testo;
-    this.indice = indice;
     this.stato = 'in_corso';
   }
 
@@ -24,14 +22,6 @@ export class Task {
 
   setTesto(testo: string) {
     this.testo = testo;
-  }
-
-  getIndice(): number {
-    return this.indice;
-  }
-
-  setIndice(indice: number) {
-    this.indice = indice;
   }
 
   completaTask() {
