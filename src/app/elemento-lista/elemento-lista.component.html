@@ -7,7 +7,7 @@
       <button type="button" class="btn btn-danger" (click)="eliminaTask()">Elimina</button>
     </div>
   </div>
-  <div *ngIf="taskInModifica" id="campo-modifica" class="d-flex w-100 justify-content-between align-items-end">
+  <div [@slideInOut]="animationState" id="campo-modifica" class="d-flex w-100 justify-content-between align-items-end">
       <input [(ngModel)]="testoTaskModificato" id="task-modificato" type="text" class="form-control" placeholder="Modifica il task">
       <button (click)="inviaModifica()" class="btn btn-primary">Modifica</button>
   </div>

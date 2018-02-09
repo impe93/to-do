@@ -2,11 +2,13 @@ import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { Input } from '@angular/core';
 import { Task } from '../../modelli/Task';
 import { Messaggio } from '../../modelli/Messaggio';
+import { SlideInOutAnimation } from '../animations';
 
 @Component({
   selector: 'app-elemento-lista',
   templateUrl: './elemento-lista.component.html',
-  styleUrls: ['./elemento-lista.component.css']
+  styleUrls: ['./elemento-lista.component.css'],
+  animations: [ SlideInOutAnimation ]
 })
 export class ElementoListaComponent implements OnInit {
 
@@ -17,18 +19,18 @@ export class ElementoListaComponent implements OnInit {
   @Output() completamentoTask = new EventEmitter<Messaggio>();
   @Input() task: Task;
   @Input() indice: number;
-  taskInModifica = false;
+
   testoTaskModificato = '';
+  animationState = 'out';
 
   ngOnInit() { }
 
   iniziaModifica() {
-    this.taskInModifica = !this.taskInModifica;
+    this.animationState = this.animationState === 'in' ? 'out' : 'in';
   }
 
   inviaModifica() {
     this.modificaTask.emit(new Messaggio(new Task(this.testoTaskModificato), this.indice));
-    this.taskInModifica = false;
   }
 
   eliminaTask() {
