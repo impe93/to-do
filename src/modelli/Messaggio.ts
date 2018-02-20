@@ -1,11 +1,12 @@
 import { Task } from './Task';
 
-export class Messaggio {
-  task: Task;
+export interface Messaggio {
+  _id: string;
   indice: number;
+}
 
-  constructor (task: Task, indice: number) {
-    this.task = task;
-    this.indice = indice;
-  }
+export interface MessaggioTesto {
+  _id: string;
+  indice: number;
+  testo: string;
 }

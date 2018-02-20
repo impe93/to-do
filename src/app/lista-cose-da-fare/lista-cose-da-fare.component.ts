@@ -1,49 +1,58 @@
 import { Component, OnInit } from '@angular/core';
+
 import { Task } from '../../modelli/Task';
-import { Messaggio } from '../../modelli/Messaggio';
+import { Messaggio, MessaggioTesto } from '../../modelli/Messaggio';
+import { SlideInOutAnimation } from '../animations';
+
+import { TaskService } from '../task.service';
 
 @Component({
   selector: 'app-lista-cose-da-fare',
   templateUrl: './lista-cose-da-fare.component.html',
-  styleUrls: ['./lista-cose-da-fare.component.css']
+  styleUrls: ['./lista-cose-da-fare.component.css'],
+  animations: [ SlideInOutAnimation ]
 })
 export class ListaCoseDaFareComponent implements OnInit {
 
   tasks: Task[] = [];
-  tasksEliminati: Task[] = [];
-  tasksCompletati: Task[] = [];
+  animationStateListaAttivi = 'in';
 
-  constructor() { }
+  constructor(
+    private taskService: TaskService
+  ) { }
 
   ngOnInit() {
+    this.taskService.getTaskDaFare()
+      .subscribe((tasks: Task[]) => {
+        this.tasks = tasks;
+      });
   }
 
-  aggiuntaTask(task: string) {
-    this.tasks.push(new Task(task));
+  aggiuntaTask(testo: string) {
+    this.taskService.aggiungiNuovoTask(testo)
+      .subscribe((task: Task) => {
+        if (task) {
+          this.tasks.push(task);
+        }
+      });
   }
 
-  modificaTask(messaggio: Messaggio) {
-    this.tasks[messaggio.indice] = messaggio.task;
+  modificaTask(messaggio: MessaggioTesto) {
+    this.taskService.aggiornaTask(messaggio._id, '', messaggio.testo)
+      .subscribe((task: Task) => {
+        if (task) {
+          this.tasks[messaggio.indice] = task;
+        }
+      });
   }
 
-  eliminaTask(messaggio: Messaggio) {
-    if (this.tasks.splice(messaggio.indice, 1) !== []) {
-      this.tasksEliminati.push(messaggio.task);
-    }
-  }
-
-  completaTask(messaggio: Messaggio) {
-    if (this.tasks.splice(messaggio.indice, 1) !== []) {
-      this.tasksCompletati.push(messaggio.task);
-    }
-  }
-
-  rimuoviCompletate() {
-    this.tasksCompletati = [];
-  }
-
-  rimuoviEliminate() {
-    this.tasksEliminati = [];
+  completaEliminaTask(messaggio: Messaggio) {
+    this.taskService.aggiornaTask(messaggio._id, this.tasks[messaggio.indice].stato)
+      .subscribe((task: Task) => {
+        if (task) {
+          this.tasks.splice(messaggio.indice, 1);
+        }
+      });
   }
 
 }

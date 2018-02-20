@@ -1,55 +1,65 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { Input } from '@angular/core';
 import { Task } from '../../modelli/Task';
-import { Messaggio } from '../../modelli/Messaggio';
-import { SlideInOutAnimation } from '../animations';
+import { Messaggio, MessaggioTesto } from '../../modelli/Messaggio';
+import { SlideInOutWithMarginAnimation } from '../animations';
 
 @Component({
   selector: 'app-elemento-lista',
   templateUrl: './elemento-lista.component.html',
   styleUrls: ['./elemento-lista.component.css'],
-  animations: [ SlideInOutAnimation ]
+  animations: [ SlideInOutWithMarginAnimation ]
 })
 export class ElementoListaComponent implements OnInit {
-
   constructor() { }
 
-  @Output() modificaTask = new EventEmitter<Messaggio>();
+  @Output() modificaTask = new EventEmitter<MessaggioTesto>();
   @Output() eliminazioneTask = new EventEmitter<Messaggio>();
   @Output() completamentoTask = new EventEmitter<Messaggio>();
   @Input() task: Task;
   @Input() indice: number;
 
   testoTaskModificato = '';
-  animationState = 'out';
+
+
+  animationStateCampoModifica = 'out';
+  animationStateComponent = 'in';
 
   ngOnInit() { }
 
   iniziaModifica() {
-    this.animationState = this.animationState === 'in' ? 'out' : 'in';
+    this.animationStateCampoModifica = this.animationStateCampoModifica === 'in' ? 'out' : 'in';
   }
 
   inviaModifica() {
-    this.modificaTask.emit(new Messaggio(new Task(this.testoTaskModificato), this.indice));
+    if (this.testoTaskModificato.trim() !== '') {
+      this.modificaTask.emit({
+        _id: this.task._id,
+        indice: this.indice,
+        testo: this.testoTaskModificato
+      });
+    }
+    this.testoTaskModificato = '';
   }
 
   eliminaTask() {
-    this.task.eliminaTaks();
-    this.eliminazioneTask.emit(new Messaggio(this.task, this.indice));
-  }
-
-  completaTask() {
-    if (this.task.getStato() === 'in_corso') {
-      this.task.completaTask();
-      this.completamentoTask.emit(new Messaggio(this.task, this.indice));
+    if (this.task.stato === 'in_corso') {
+      this.task.stato = 'eliminato';
+      this.eliminazioneTask.emit({
+        _id: this.task._id,
+        indice: this.indice
+      });
     }
   }
 
-  setClass() {
-    const classe = {
-      'list-group-item-success': this.task.getStato() === 'completato'
-    };
-    return classe;
+  completaTask() {
+    if (this.task.stato === 'in_corso') {
+      this.task.stato = 'completato';
+      this.completamentoTask.emit({
+        _id: this.task._id,
+        indice: this.indice
+      });
+    }
   }
 
 }

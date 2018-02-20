@@ -1,13 +1,13 @@
-<a [ngClass]="setClass()" class="list-group-item list-group-item-action flex-column align-items-start">
+<a class="list-group-item list-group-item-action flex-column align-items-start">
   <div class="d-flex w-100 justify-content-between align-items-end flex-wrap-reverse">
-    <h5>{{ indice + 1 }}. {{ task.getTesto() }}</h5>
+    <h5>{{ indice + 1 }}. {{ task.testo }}</h5>
     <div class="btn-group btn-group-sm" role="group" aria-label="Task">
       <button type="button" class="btn btn-secondary" (click)="iniziaModifica()">Modifica</button>
       <button type="button" class="btn btn-success" (click)="completaTask()">Completa</button>
       <button type="button" class="btn btn-danger" (click)="eliminaTask()">Elimina</button>
     </div>
   </div>
-  <div [@slideInOut]="animationState" id="campo-modifica" class="d-flex w-100 justify-content-between align-items-end">
+  <div [@slideInOutWithMargin]="animationStateCampoModifica" id="campo-modifica" class="d-flex w-100 justify-content-between align-items-end">
       <input [(ngModel)]="testoTaskModificato" id="task-modificato" type="text" class="form-control" placeholder="Modifica il task">
       <button (click)="inviaModifica()" class="btn btn-primary">Modifica</button>
   </div>

@@ -1,0 +1,9 @@
+<a [ngClass]="setClass()" class="list-group-item list-group-item-action flex-column align-items-start">
+  <div class="d-flex w-100 justify-content-between align-items-end flex-wrap-reverse">
+    <h5>{{ indice + 1 }}. {{ task.testo }}</h5>
+    <div class="btn-group btn-group-sm" role="group" aria-label="Task">
+      <button type="button" class="btn btn-success" (click)="ripristinaTask()">Ripristina</button>
+      <button type="button" class="btn btn-danger" (click)="rimuoviTask()">Rimuovi</button>
+    </div>
+  </div>
+</a>

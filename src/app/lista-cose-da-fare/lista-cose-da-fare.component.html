@@ -2,31 +2,13 @@
 
 <app-aggiungi-task (aggiuntaTask)="aggiuntaTask($event)"></app-aggiungi-task>
 
-<div *ngIf="tasks.length >= 1">
-  <h2>Attività attive</h2>
-  <div id="lista-attivi" class="list-group">
-    <app-elemento-lista
-    *ngFor="let task of tasks; let i=index"
-    [task]="task"
-    [indice]="i"
-    (modificaTask)="modificaTask($event)"
-    (eliminazioneTask)="eliminaTask($event)"
-    (completamentoTask)="completaTask($event)"></app-elemento-lista>
-  </div>
-</div>
-
-<div *ngIf="tasksCompletati.length >= 1">
-  <h2>Attività completate</h2>
-  <button (click)="rimuoviCompletate()" class="btn btn-primary bottone-rimozione">Rimuovi completate</button>
-  <div id="lista-completati" class="list-group">
-    <a class="list-group-item list-group-item-action list-group-item-success" *ngFor="let task of tasksCompletati; let i=index"><h5>{{ i + 1 }}. {{ task.getTesto() }}</h5></a>
-  </div>
-</div>
-
-<div *ngIf="tasksEliminati.length >= 1">
-  <h2>Attività eliminate</h2>
-  <button (click)="rimuoviEliminate()" class="btn btn-primary bottone-rimozione">Elimina definitivamente</button>
-  <div id="lista-eliminati" class="list-group">
-    <a class="list-group-item list-group-item-action list-group-item-danger" *ngFor="let task of tasksEliminati; let i=index"><h5>{{ i + 1 }}. {{ task.getTesto() }}</h5></a>
-  </div>
+<h2 *ngIf="tasks.length >= 1">Attività attive</h2>
+<div id="lista-attivi" class="list-group">
+  <app-elemento-lista
+  *ngFor="let task of tasks; let i=index"
+  [task]="task"
+  [indice]="i"
+  (modificaTask)="modificaTask($event)"
+  (eliminazioneTask)="completaEliminaTask($event)"
+  (completamentoTask)="completaEliminaTask($event)"></app-elemento-lista>
 </div>

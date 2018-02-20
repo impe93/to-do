@@ -1,0 +1,12 @@
+<div>
+  <h2>Attività {{ listaAttuale }}</h2>
+  <button (click)="rimuoviEliminateCompletate()" class="btn btn-primary bottone-rimozione">Rimuovi tutte</button>
+  <div id="lista" class="list-group">
+    <app-attivita
+      *ngFor="let task of tasks; let i=index"
+      [indice]="i"
+      [task]="task"
+      (rimozioneTask)="rimuoviTask($event)"
+      (ripristinoTask)="ripristinaTask($event)"></app-attivita>
+  </div>
+</div>

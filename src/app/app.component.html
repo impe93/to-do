@@ -1,7 +1,39 @@
 <div id="esterno" class="container">
+
+
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand mx-auto" href="#">To-Do App</a>
+    <a class="navbar-brand" href="#">To-Do App</a>
+    <button class="navbar-toggler"
+      type="button"
+      data-toggle="collapse"
+      data-target="#navbarNav"
+      aria-controls="navbarNav"
+      aria-expanded="false"
+      aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+            routerLink="/">Da fare</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link"
+            routerLinkActive="active"
+            routerLink="/completate">Completate</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link"
+            routerLinkActive="active"
+            routerLink="/eliminate">Eliminate</a>
+        </li>
+      </ul>
+    </div>
   </nav>
+
   <router-outlet></router-outlet>
   <footer>
     <p id="copyright">To Do di Lorenzo Imperatrice per il blog <a href="https://www.lorenzoimperatrice.it">www.lorenzoimperatrice.it</a></p>
