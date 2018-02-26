@@ -12,10 +12,6 @@ import { AuthService } from '../auth.service';
 })
 export class RegistrazioneFormComponent implements OnInit {
 
-  name = '';
-  email = '';
-  password = '';
-
   constructor(
     private auth: AuthService,
     private router: Router
