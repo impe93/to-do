@@ -13,7 +13,12 @@ import { ElementoListaComponent } from './elemento-lista/elemento-lista.componen
 import { ListaComponent } from './lista/lista.component';
 import { AttivitaComponent } from './attivita/attivita.component';
 import { TaskService } from './task.service';
+import { AuthGuardService } from './auth-guard.service';
 import { PaginaNonTrovataComponent } from './pagina-non-trovata/pagina-non-trovata.component';
+import { AuthService } from './auth.service';
+import { LoginComponent } from './login/login.component';
+import { LoginFormComponent } from './login-form/login-form.component';
+import { RegistrazioneFormComponent } from './registrazione-form/registrazione-form.component';
 
 
 @NgModule({
@@ -24,7 +29,10 @@ import { PaginaNonTrovataComponent } from './pagina-non-trovata/pagina-non-trova
     ElementoListaComponent,
     ListaComponent,
     AttivitaComponent,
-    PaginaNonTrovataComponent
+    PaginaNonTrovataComponent,
+    LoginComponent,
+    LoginFormComponent,
+    RegistrazioneFormComponent
   ],
   imports: [
     BrowserModule,
@@ -34,7 +42,9 @@ import { PaginaNonTrovataComponent } from './pagina-non-trovata/pagina-non-trova
     HttpClientModule
   ],
   providers: [
-    TaskService
+    TaskService,
+    AuthGuardService,
+    AuthService
   ],
   bootstrap: [AppComponent]
 })
